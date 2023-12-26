@@ -4,6 +4,7 @@ class Matrix:
     def __init__(self, matrix: List) -> None:
         self.matrix = matrix
         self.determinant = self.calculate_determinant(self.matrix)
+        self.matrix_type = self.get_matrix_type()
 
     def calculate_determinant(self, matrix):
         if len(matrix) == 2:
@@ -19,14 +20,20 @@ class Matrix:
 
         return determinant
 
+    def get_matrix_type(self) -> str:
+        if self.determinant == 0:
+            return "singular"
+        else:
+            return "non-singular"
+
 
 class MatrixOps:
-    def __init__(self, a: List[int], b: List[int], show = True) -> None:
-        self.a = a
-        self.b = b
+    def __init__(self, a: Matrix, b: Matrix, show = True) -> None:
+        self.a = a.matrix
+        self.b = b.matrix
         self.show = show
 
-    def addition(self) -> List[int]:
+    def addition(self) -> Matrix:
         new_matrix = []
         for a, b in zip(self.a, self.b):
             new_matrix.append(a + b)
@@ -34,62 +41,17 @@ class MatrixOps:
         if self.show:
             print(new_matrix)
 
-        return new_matrix
+        return Matrix(new_matrix)
 
-    def multiplication(self) -> List[int]:
+    def multiplication(self) -> Matrix:
         new_matrix = []
         for a, b in zip(self.a, self.b):
-            new_matrix.append(a * b)
+            new_matrix.append(a + b)
 
         if self.show:
             print(new_matrix)
 
-        return new_matrix
-
-    def find_type_using_sum(self) -> str:
-        a_sum = sum(self.a)
-        b_sum = sum(self.b)
-        division = 0
-        
-        if a_sum >= b_sum:
-            division = a_sum / b_sum
-        else:
-            division = b_sum / a_sum
-
-        if division.is_integer():
-            if self.show:
-                print("Matrix is singular")
-            return "singular"
-        else:
-            if self.show:
-                print("Matrix is non-singular")
-            return "non-singular"
-
-    def find_type_using_determinant(self) -> str:
-        determinant = self.find_determinant()
-
-        if determinant == 0:
-            if self.show:
-                print("Matrix is singular")
-            return "singular"
-        else:
-            if self.show:
-                print("Matrix is non-singular")
-            return "non-singular"
-
-    def find_determinant(self) -> int:
-        reverse_b = self.b[::-1]
-        determinant = 0
-        i = 1
-
-        for a, b in zip(self.a, reverse_b):
-            determinant += i * (a + b)
-            i *= -1
-
-        if self.show:
-            print(f"Determinant is {determinant}")
-
-        return determinant
+        return Matrix(new_matrix)
 
 
 if __name__ == "__main__":
@@ -106,10 +68,21 @@ if __name__ == "__main__":
         [4, 10, 6],
         [7, 8, 9],
     ]
+    d = [
+        [2, 2, 2, 5],
+        [6, 9, 6, 9],
+        [2, 1, 0, 0],
+        [8, 7, 6, 5],
+    ]
     ma = Matrix(a)
     mb = Matrix(b)
     mc = Matrix(c)
+    md = Matrix(d)
     print(ma.determinant)
+    print(ma.matrix_type)
     print(mb.determinant)
+    print(mb.matrix_type)
     print(mc.determinant)
-
+    print(mc.matrix_type)
+    print(md.determinant)
+    print(md.matrix_type)
