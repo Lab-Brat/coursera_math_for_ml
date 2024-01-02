@@ -56,33 +56,10 @@ class MatrixOps:
 
 if __name__ == "__main__":
     a = [
-        [5, 1],
-        [-1, 3],
-    ]
-    b = [
-        [2, -1],
-        [-6, 3],
-    ]
-    c = [
-        [1, 2, 3],
-        [4, 10, 6],
-        [7, 8, 9],
-    ]
-    d = [
-        [2, 2, 2, 5],
-        [6, 9, 6, 9],
-        [2, 1, 0, 0],
-        [8, 7, 6, 5],
+        [-3, 8, 1],
+        [2, 2, -1],
+        [-5, 6, 2],
     ]
     ma = Matrix(a)
-    mb = Matrix(b)
-    mc = Matrix(c)
-    md = Matrix(d)
     print(ma.determinant)
     print(ma.matrix_type)
-    print(mb.determinant)
-    print(mb.matrix_type)
-    print(mc.determinant)
-    print(mc.matrix_type)
-    print(md.determinant)
-    print(md.matrix_type)
