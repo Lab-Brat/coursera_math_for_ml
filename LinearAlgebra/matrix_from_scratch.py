@@ -1,9 +1,10 @@
 from typing import List, Tuple
+from sys import exit
 
 
 class Matrix:
     def __init__(self, matrix: List) -> None:
-        self.matrix = matrix
+        self.matrix = self.verify_matrix(matrix)
         self.shape = self.get_matrix_shape()
 
         if self.shape[1] > 1:
@@ -12,6 +13,21 @@ class Matrix:
         else:
             self.determinant = None
             self.matrix_type = "vector"
+
+    def verify_matrix(self, input_matrix) -> List:
+        inside_matrix = type(input_matrix[0])
+        if inside_matrix is int or float:
+            vector = []
+            for x in input_matrix:
+                x_list = []
+                x_list.append(x)
+                vector.append(x_list)
+            return vector
+        elif input_matrix is list:
+            return input_matrix
+        else:
+            print("Wrong element type, should be List[List] or List[int]")
+            exit(1)
 
     def calculate_determinant(self, matrix):
         if len(matrix) == 2:
@@ -76,14 +92,18 @@ if __name__ == "__main__":
     #     [-5, 6, 2],
     # ]
     # ma = Matrix(a)
-    a1 = [
-        [2],
-        [-3],
-    ]
-    b1 = [
-        [1],
-        [6],
-    ]
-    A1 = Matrix(a1)
-    B1 = Matrix(b1)
-    MatrixOps(A1, B1, show=True).dot_product()
+
+    # a1 = [
+    #     [2],
+    #     [-3],
+    # ]
+    # b1 = [
+    #     [1],
+    #     [6],
+    # ]
+    # A1 = Matrix(a1)
+    # B1 = Matrix(b1)
+    # MatrixOps(A1, B1, show=True).dot_product()
+
+    l1 = [1,2,3]
+    Matrix(l1)
