@@ -1,5 +1,5 @@
 import numpy as np
-from week1_matrix_from_scratch import Matrix
+from matrix_from_scratch import Matrix
 
 # solving systems of linear equations
 
