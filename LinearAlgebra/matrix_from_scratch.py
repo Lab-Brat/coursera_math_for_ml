@@ -98,9 +98,9 @@ class MatrixOps:
         return Matrix(new_matrix)
 
     def _calculate_dot_product(self, x, y):
-        if self.a.matrix_type == "vector" and self.b.matrix_type == "vector":
+        if x.matrix_type == "vector" and y.matrix_type == "vector":
             product = 0.0
-            for a, b in zip(x, y):
+            for a, b in zip(x.matrix, y.matrix):
                 product += a[0] * b[0]
             return product
         else:
@@ -114,6 +114,26 @@ class MatrixOps:
              print(product)
 
          return product
+
+    def multiplication(self):
+        # check if can multiply first
+
+        result = Matrix(
+            [], 
+            empty_matrix_dimentions=(
+                self.a.shape[1],
+                self.b.shape[0],
+            )).matrix
+        
+        for i, row_a in enumerate(self.a.matrix):
+            row_a = Matrix(row_a)
+
+            for j, column_b in enumerate(self.b.reverse()):
+                column_b = Matrix(column_b)
+                result[i][j] = self._calculate_dot_product(row_a, column_b)
+
+        return result
+
 
 
 if __name__ == "__main__":
@@ -135,6 +155,5 @@ if __name__ == "__main__":
     A1 = Matrix(a1)
     B1 = Matrix(b1)
 
-    empty = Matrix([], empty_matrix_dimentions=(2,2))
-    print(empty.matrix)
+    print(MatrixOps(A1, B1).multiplication())
 
