@@ -3,7 +3,8 @@ from sys import exit
 
 
 class Matrix:
-    def __init__(self, matrix: List) -> None:
+    def __init__(self, matrix: List, empty_matrix_dimentions = (1,1)) -> None:
+        self.empty_matrix_dimentions = empty_matrix_dimentions
         self.matrix = self.verify_matrix(matrix)
         self.shape = self.get_matrix_shape()
 
@@ -15,6 +16,11 @@ class Matrix:
             self.matrix_type = "vector"
 
     def verify_matrix(self, input_matrix) -> List:
+        if input_matrix == []:
+            rows = self.empty_matrix_dimentions[0]
+            columns = self.empty_matrix_dimentions[1]
+            return self.initialize_zeros_matrix(rows, columns)
+
         inside_matrix = type(input_matrix[0])
         if inside_matrix is int or inside_matrix is float:
             vector = []
@@ -55,10 +61,10 @@ class Matrix:
 
         return (rows, columns)
 
-    def initialize_empty_matrix(self, rows, columns) -> List:
+    def initialize_zeros_matrix(self, rows, columns) -> List:
         matrix = []
         for _ in range(rows):
-            row = [None] * columns
+            row = [0] * columns
             matrix.append(row)
 
         return matrix
@@ -66,7 +72,7 @@ class Matrix:
     def reverse(self) -> List:
         rows = self.shape[0]
         columns = self.shape[1]
-        reversed_matrix = self.initialize_empty_matrix(rows, columns)
+        reversed_matrix = self.initialize_zeros_matrix(rows, columns)
 
         for i in range(rows):
             for j in range(columns):
@@ -129,5 +135,6 @@ if __name__ == "__main__":
     A1 = Matrix(a1)
     B1 = Matrix(b1)
 
-    print(A1.reverse())
-    print(ma.reverse())
+    empty = Matrix([], empty_matrix_dimentions=(2,2))
+    print(empty.matrix)
+
