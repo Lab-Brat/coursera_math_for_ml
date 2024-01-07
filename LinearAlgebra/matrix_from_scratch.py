@@ -16,14 +16,14 @@ class Matrix:
 
     def verify_matrix(self, input_matrix) -> List:
         inside_matrix = type(input_matrix[0])
-        if inside_matrix is int or float:
+        if inside_matrix is int or inside_matrix is float:
             vector = []
             for x in input_matrix:
                 x_list = []
                 x_list.append(x)
                 vector.append(x_list)
             return vector
-        elif input_matrix is list:
+        elif inside_matrix is list:
             return input_matrix
         else:
             print("Wrong element type, should be List[List] or List[int]")
@@ -72,38 +72,41 @@ class MatrixOps:
 
         return Matrix(new_matrix)
 
-    def dot_product(self) -> float | None:
+    def _calculate_dot_product(self, x, y):
         if self.a.matrix_type == "vector" and self.b.matrix_type == "vector":
             product = 0.0
-            for a, b in zip(self.a.matrix, self.b.matrix):
+            for a, b in zip(x, y):
                 product += a[0] * b[0]
-
-            if self.show:
-                print(product)
             return product
         else:
             print("can only calculate dor product for vectors")
+            exit(1)
+
+    def dot_product(self) -> float | None:
+         product = self._calculate_dot_product(self.a.matrix, self.b.matrix)
+
+         if self.show:
+             print(product)
+
+         return product
 
 
 if __name__ == "__main__":
-    # a = [
-    #     [-3, 8, 1],
-    #     [2, 2, -1],
-    #     [-5, 6, 2],
-    # ]
-    # ma = Matrix(a)
+    a = [
+        [-3, 8, 1],
+        [2, 2, -1],
+        [-5, 6, 2],
+    ]
+    ma = Matrix(a)
 
-    # a1 = [
-    #     [2],
-    #     [-3],
-    # ]
-    # b1 = [
-    #     [1],
-    #     [6],
-    # ]
-    # A1 = Matrix(a1)
-    # B1 = Matrix(b1)
-    # MatrixOps(A1, B1, show=True).dot_product()
-
-    l1 = [1,2,3]
-    Matrix(l1)
+    a1 = [
+        [2, 1],
+        [-3, 2],
+    ]
+    b1 = [
+        [1, 3],
+        [6, 2],
+    ]
+    A1 = Matrix(a1)
+    B1 = Matrix(b1)
+    MatrixOps(A1, B1, show=True)
