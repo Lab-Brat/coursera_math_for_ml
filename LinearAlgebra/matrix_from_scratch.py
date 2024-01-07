@@ -55,6 +55,25 @@ class Matrix:
 
         return (rows, columns)
 
+    def initialize_empty_matrix(self, rows, columns) -> List:
+        matrix = []
+        for _ in range(rows):
+            row = [None] * columns
+            matrix.append(row)
+
+        return matrix
+
+    def reverse(self) -> List:
+        rows = self.shape[0]
+        columns = self.shape[1]
+        reversed_matrix = self.initialize_empty_matrix(rows, columns)
+
+        for i in range(rows):
+            for j in range(columns):
+                reversed_matrix[i][j] = self.matrix[j][i]
+
+        return reversed_matrix
+
 
 class MatrixOps:
     def __init__(self, a: Matrix, b: Matrix, show=True) -> None:
@@ -109,4 +128,6 @@ if __name__ == "__main__":
     ]
     A1 = Matrix(a1)
     B1 = Matrix(b1)
-    MatrixOps(A1, B1, show=True)
+
+    print(A1.reverse())
+    print(ma.reverse())
