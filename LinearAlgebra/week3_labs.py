@@ -8,7 +8,6 @@ from plotter import plot_vectors
 #
 # In linear algebra, vectors always start at (0,0)
 
-
 # Vector operations
 v = np.array([[1], [3]])
 w = np.array([[4], [-1]])
@@ -56,3 +55,22 @@ My = Matrix(y)
 
 MatrixOps(Mx, My, show=True).dot_product()
 print(np.dot(x, y))
+
+
+
+# Matrix Multiplication
+a1 = [
+    [2, 1],
+    [-3, 2],
+]
+b1 = [
+    [1, 3],
+    [6, 2],
+]
+A1 = np.array(a1)
+B1 = np.array(b1)
+A2 = Matrix(a1)
+B2 = Matrix(b1)
+
+print(np.matmul(A1,B1))
+print(MatrixOps(A2,B2).multiplication())
