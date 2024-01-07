@@ -108,7 +108,7 @@ class MatrixOps:
             exit(1)
 
     def dot_product(self) -> float | None:
-         product = self._calculate_dot_product(self.a.matrix, self.b.matrix)
+         product = self._calculate_dot_product(self.a, self.b)
 
          if self.show:
              print(product)
