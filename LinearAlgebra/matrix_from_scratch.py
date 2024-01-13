@@ -55,9 +55,12 @@ class Matrix:
         else:
             return "non-singular"
 
-    def get_matrix_shape(self) -> Tuple:
-        rows = len(self.matrix)
-        columns = len(self.matrix[0])
+    def get_matrix_shape(self, matrix=None) -> Tuple:
+        if not matrix:
+            matrix = self.matrix
+
+        rows = len(matrix)
+        columns = len(matrix[0])
 
         return (rows, columns)
 
@@ -69,14 +72,18 @@ class Matrix:
 
         return matrix
 
-    def reverse(self) -> List:
-        rows = self.shape[0]
-        columns = self.shape[1]
+    def transpose(self, matrix=None) -> List:
+        if not matrix:
+            matrix = self.matrix
+
+        shape = self.get_matrix_shape(matrix)
+        rows = shape[0]
+        columns = shape[1]
         reversed_matrix = self.initialize_zeros_matrix(rows, columns)
 
         for i in range(rows):
             for j in range(columns):
-                reversed_matrix[i][j] = self.matrix[j][i]
+                reversed_matrix[i][j] = matrix[j][i]
 
         return reversed_matrix
 
@@ -127,7 +134,7 @@ class MatrixOps:
         for i, row_a in enumerate(self.a.matrix):
             row_a = Matrix(row_a)
 
-            for j, column_b in enumerate(self.b.reverse()):
+            for j, column_b in enumerate(self.b.transpose()):
                 column_b = Matrix(column_b)
                 result[i][j] = self._calculate_dot_product(row_a, column_b)
 
