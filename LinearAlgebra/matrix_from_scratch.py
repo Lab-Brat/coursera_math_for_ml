@@ -3,7 +3,7 @@ from sys import exit
 
 
 class Matrix:
-    def __init__(self, matrix: List, empty_matrix_dimentions = (1,1)) -> None:
+    def __init__(self, matrix: List, empty_matrix_dimentions=(1, 1)) -> None:
         self.empty_matrix_dimentions = empty_matrix_dimentions
         self.matrix = self.verify_matrix(matrix)
         self.shape = self.get_matrix_shape()
@@ -108,23 +108,22 @@ class MatrixOps:
             exit(1)
 
     def dot_product(self) -> float | None:
-         product = self._calculate_dot_product(self.a, self.b)
+        product = self._calculate_dot_product(self.a, self.b)
 
-         if self.show:
-             print(product)
+        if self.show:
+            print(product)
 
-         return product
+        return product
 
     def multiplication(self):
-        # check if can multiply first
-
         result = Matrix(
-            [], 
+            [],
             empty_matrix_dimentions=(
                 self.a.shape[1],
                 self.b.shape[0],
-            )).matrix
-        
+            ),
+        ).matrix
+
         for i, row_a in enumerate(self.a.matrix):
             row_a = Matrix(row_a)
 
@@ -135,25 +134,5 @@ class MatrixOps:
         return result
 
 
-
 if __name__ == "__main__":
-    a = [
-        [-3, 8, 1],
-        [2, 2, -1],
-        [-5, 6, 2],
-    ]
-    ma = Matrix(a)
-
-    a1 = [
-        [2, 1],
-        [-3, 2],
-    ]
-    b1 = [
-        [1, 3],
-        [6, 2],
-    ]
-    A1 = Matrix(a1)
-    B1 = Matrix(b1)
-
-    print(MatrixOps(A1, B1).multiplication())
-
+    pass
