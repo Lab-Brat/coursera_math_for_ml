@@ -87,6 +87,35 @@ class Matrix:
 
         return reversed_matrix
 
+    def _get_minor(self, m, i, j):
+        return [row[:j] + row[j + 1 :] for row in (m[:i] + m[i + 1 :])]
+
+    def calculate_inverse(self, matrix):
+        determinant = self.calculate_determinant(matrix)
+
+        if len(matrix) == 2:
+            return [
+                [matrix[1][1] / determinant, -1 * matrix[0][1] / determinant],
+                [-1 * matrix[1][0] / determinant, matrix[0][0] / determinant],
+            ]
+
+        cofactors = []
+        for row in range(len(matrix)):
+            cofactor_row = []
+            for column in range(len(matrix)):
+                minor = self._get_minor(matrix, row, column)
+                cofactor_row.append(
+                    ((-1) ** (row + column)) * self.calculate_determinant(minor)
+                )
+            cofactors.append(cofactor_row)
+        cofactors = self.transpose(cofactors)
+
+        for r in range(len(cofactors)):
+            for c in range(len(cofactors)):
+                cofactors[r][c] = cofactors[r][c] / determinant
+
+        return cofactors
+
 
 class MatrixOps:
     def __init__(self, a: Matrix, b: Matrix, show=True) -> None:
@@ -142,4 +171,14 @@ class MatrixOps:
 
 
 if __name__ == "__main__":
-    pass
+    c = [
+        [6, 1, 1],
+        [4, -2, 5],
+        [2, 8, 7],
+    ]
+
+    ma = Matrix(c)
+    inverse = ma.calculate_inverse(c)
+    print(inverse)
+    # proof
+    print(MatrixOps(ma, Matrix(inverse)).multiplication())
