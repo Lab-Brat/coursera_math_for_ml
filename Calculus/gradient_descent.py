@@ -16,7 +16,7 @@ class DataSet:
     def show_dataset(self, pd_data):
         print("Preview:")
         print(pd_data.head())
-        #pd_data.plot(x="TV", y="Sales", kind="scatter", c="black", backend="matplotlib")
+        # pd_data.plot(x="TV", y="Sales", kind="scatter", c="black", backend="matplotlib")
         print()
         print(f"Dimensions: {pd_data.shape[1]} columns of length {pd_data.shape[0]}")
         print()
@@ -49,7 +49,7 @@ class LinReg:
         lr_sci.fit(X, Y)
         m = lr_sci.coef_
         b = lr_sci.intercept_
-        return m[0][0], b[0] #noqa
+        return m[0][0], b[0]  # noqa
 
     def linear_regression_from_scratch(self, X, Y):
         return (0, 0)
@@ -77,9 +77,8 @@ class LinReg:
         return result
 
 
-if __name__ == '__main__':
-    data_file = './data/tvmarketing.csv'
+if __name__ == "__main__":
+    data_file = "./data/tvmarketing.csv"
     dataset = DataSet(data_file, show=True)
     method = "sci"
     LinReg(dataset, show=True, method=method).calculate()
-
