@@ -41,7 +41,15 @@ class LinReg:
         return m, b
 
     def linear_regression_sklearn(self, X, Y):
-        return (0, 0)
+        X = np.array(X)
+        Y = np.array(Y)
+        X = X.reshape(self.data.shape[0], 1)
+        Y = Y.reshape(self.data.shape[0], 1)
+        lr_sci = LinearRegression()
+        lr_sci.fit(X, Y)
+        m = lr_sci.coef_
+        b = lr_sci.intercept_
+        return m[0][0], b[0] #noqa
 
     def linear_regression_from_scratch(self, X, Y):
         return (0, 0)
@@ -72,6 +80,6 @@ class LinReg:
 if __name__ == '__main__':
     data_file = './data/tvmarketing.csv'
     dataset = DataSet(data_file, show=True)
-    method = "np"
+    method = "sci"
     LinReg(dataset, show=True, method=method).calculate()
 
