@@ -1,6 +1,7 @@
 import pandas as pd
 from gradient_descent import LinReg
 
+
 class DataSet:
     def __init__(self, data_file, show=False) -> None:
         self.pd_data = pd.read_csv(data_file)

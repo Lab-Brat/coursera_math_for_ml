@@ -2,6 +2,7 @@ import numpy as np
 from typing import Tuple
 from sklearn.linear_model import LinearRegression
 
+
 class LinReg:
     def __init__(self, dataset, show=False, method=None) -> None:
         self.data = dataset.pd_data
