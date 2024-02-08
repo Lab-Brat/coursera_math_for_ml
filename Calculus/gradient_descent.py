@@ -1,33 +1,9 @@
-from typing import Tuple
 import numpy as np
-import pandas as pd
-
+from typing import Tuple
 from sklearn.linear_model import LinearRegression
 
-
-class DataSet:
-    def __init__(self, data_file, show=False) -> None:
-        self.pd_data = pd.read_csv(data_file)
-        self.show = show
-
-        if show:
-            self.show_dataset(self.pd_data)
-
-    def show_dataset(self, pd_data):
-        print("Preview:")
-        print(pd_data.head())
-        # pd_data.plot(x="TV", y="Sales", kind="scatter", c="black", backend="matplotlib")
-        print()
-        print(f"Dimensions: {pd_data.shape[1]} columns of length {pd_data.shape[0]}")
-        print()
-        print(f"Column names:")
-        for column in pd_data.columns:
-            print(column)
-        print()
-
-
 class LinReg:
-    def __init__(self, dataset: DataSet, show=False, method=None) -> None:
+    def __init__(self, dataset, show=False, method=None) -> None:
         self.data = dataset.pd_data
         self.show = show
         self.method = method
@@ -110,10 +86,3 @@ class LinReg:
             print(f"slope = {m}, intercept = {b}")
 
         return result
-
-
-if __name__ == "__main__":
-    data_file = "./data/tvmarketing.csv"
-    dataset = DataSet(data_file, show=True)
-    method = "scr"
-    LinReg(dataset, show=True, method=method).calculate()
