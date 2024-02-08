@@ -33,9 +33,6 @@ class LinReg:
         Y = (Y - np.mean(Y)) / np.std(Y)
         return X, Y
 
-    def _denormalize(self, X, Y):
-        pass
-
     def _sum_of_squares_cost_function(self, m, b, X, Y):
         return 1 / (2 * len(Y)) * np.sum((m * X + b - Y) ** 2)
 
@@ -62,7 +59,7 @@ class LinReg:
         learning_rate = 1.2
         iterations = 30
         m, b = self.gradient_descent(
-            m, b, X, Y, learning_rate, iterations, show_cost=True
+            m, b, X, Y, learning_rate, iterations, show_cost=False
         )
         return m, b
 
