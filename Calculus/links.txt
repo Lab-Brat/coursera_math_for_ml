@@ -1,0 +1,3 @@
+## Additional Info
+
+More about loss functions - https://dustinstansbury.github.io/theclevermachine/cutting-your-losses
