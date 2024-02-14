@@ -4,7 +4,7 @@ def simulate(pfunc, student_num, runs):
     matches = len([run for run in range(runs) if pfunc(student_num)])
     return matches / runs
 
-students = 100
+students = 253
 runs = 100
 
 # problem 1
@@ -67,10 +67,35 @@ def problem_3_analytic(student_num):
 
     return f"{1 - sums:.2f}"
 
-p3_students = 20
+p3_students = 23
 sums = 0
 for sim in range(100):
     sums += simulate(problem_3_simulate, p3_students, runs)
 print("problem 3 solution")
 print(f"{sums / 100:.2f}")
 print(problem_3_analytic(p3_students))
+
+
+# problem 4
+# Probability of any 2 people having the same birthday
+# but in different classrooms
+
+def problem_4_simulate(student_num):
+    birthdays_1 = [random.randint(1, 365) for _ in range(student_num)]
+    birthdays_2 = [random.randint(1, 365) for _ in range(student_num)]
+    unique_1 = set(birthdays_1)
+    unique_2 = set(birthdays_2)
+    return unique_1 & unique_2
+
+def problem_4_analytic(student_num):
+    prob = (1 - 1/365) ** (student_num ** 2)
+    return f"{1 - prob:.2f}"
+
+
+p4_students = 16
+sums = 0
+for sim in range(100):
+    sums += simulate(problem_4_simulate, p4_students, runs)
+print("problem 4 solution")
+print(f"{sums / 100:.2f}")
+print(problem_4_analytic(p4_students))
