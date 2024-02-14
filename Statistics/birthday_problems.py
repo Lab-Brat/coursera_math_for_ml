@@ -24,6 +24,7 @@ def problem_1_analytic(student_num):
 sums = 0
 for sim in range(100):
     sums += simulate(problem_1_simulate, students, runs)
+print("problem 1 solution")
 print(f"{sums / 100:.2f}")
 print(problem_1_analytic(students))
 
@@ -46,5 +47,30 @@ def problem_2_analytic(student_num):
 sums = 0
 for sim in range(100):
     sums += simulate(problem_2_simulate, students, runs)
+print("problem 2 solution")
 print(f"{sums / 100:.2f}")
 print(problem_2_analytic(students))
+
+
+# problem 3
+# Probability of any 2 people having the same birthday
+
+def problem_3_simulate(student_num):
+    birthdays = [random.randint(1, 365) for _ in range(student_num)]
+    unique = set(birthdays)
+    return len(birthdays) != len(unique)
+
+def problem_3_analytic(student_num):
+    sums = 1
+    for num in range(1, student_num + 1):
+        sums *= (365 - (num - 1)) / 365
+
+    return f"{1 - sums:.2f}"
+
+p3_students = 20
+sums = 0
+for sim in range(100):
+    sums += simulate(problem_3_simulate, p3_students, runs)
+print("problem 3 solution")
+print(f"{sums / 100:.2f}")
+print(problem_3_analytic(p3_students))
